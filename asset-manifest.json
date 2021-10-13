@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/AlexndrG/Friday/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/AlexndrG/Friday/static/js/main.9e3fbbe8.chunk.js",
+    "main.js.map": "/AlexndrG/Friday/static/js/main.9e3fbbe8.chunk.js.map",
+    "runtime-main.js": "/AlexndrG/Friday/static/js/runtime-main.78d58b70.js",
+    "runtime-main.js.map": "/AlexndrG/Friday/static/js/runtime-main.78d58b70.js.map",
+    "static/js/2.41fbaec4.chunk.js": "/AlexndrG/Friday/static/js/2.41fbaec4.chunk.js",
+    "static/js/2.41fbaec4.chunk.js.map": "/AlexndrG/Friday/static/js/2.41fbaec4.chunk.js.map",
+    "static/js/3.a82d2d4b.chunk.js": "/AlexndrG/Friday/static/js/3.a82d2d4b.chunk.js",
+    "static/js/3.a82d2d4b.chunk.js.map": "/AlexndrG/Friday/static/js/3.a82d2d4b.chunk.js.map",
+    "index.html": "/AlexndrG/Friday/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/AlexndrG/Friday/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.41fbaec4.chunk.js.LICENSE.txt": "/AlexndrG/Friday/static/js/2.41fbaec4.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/AlexndrG/Friday/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.78d58b70.js",
+    "static/js/2.41fbaec4.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.9e3fbbe8.chunk.js"
+  ]
+}
