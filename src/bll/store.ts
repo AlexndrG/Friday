@@ -1,10 +1,17 @@
 import {combineReducers, createStore} from 'redux'
-import {authReducer} from './authReducer';
-import {userReducer} from './userReducer';
+import {loginReducer} from './loginReducer'
+import {profileReducer} from './profileReducer'
+import {registerReducer} from './registerReducer'
+import {passwordNewReducer} from './passwordNewReducer';
+import {passwordRestoreReducer} from './passwordRestoreReducer';
+
 
 const reducers = combineReducers({
-    auth: authReducer,
-    user: userReducer,
+    login: loginReducer,
+    register: registerReducer,
+    profile: profileReducer,
+    passwordNew: passwordNewReducer,
+    passwordRestore: passwordRestoreReducer,
 })
 
 const store = createStore(reducers)

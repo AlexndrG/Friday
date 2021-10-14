@@ -4,7 +4,7 @@ type StateType = typeof initialState
 
 type ActionType = any
 
-export function userReducer(state: StateType = initialState, action: ActionType): StateType {
+export function passwordRestoreReducer(state: StateType = initialState, action: ActionType): StateType {
     switch (action.type) {
 
 

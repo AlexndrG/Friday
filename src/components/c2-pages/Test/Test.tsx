@@ -1,13 +1,14 @@
 import React from 'react';
 import s from './Test.module.css'
-import SuperInputText from '../../components/common/c1-SuperInputText/SuperInputText';
-import SuperButton from '../../components/common/c2-SuperButton/SuperButton';
-import SuperCheckbox from '../../components/common/c3-SuperCheckbox/SuperCheckbox';
-import SuperEditableSpan from '../../components/common/c4-SuperEditableSpan/SuperEditableSpan';
-import SuperSelect from '../../components/common/c5-SuperSelect/SuperSelect';
-import SuperRadio from '../../components/common/c6-SuperRadio/SuperRadio';
-import SuperRange from '../../components/common/c7-SuperRange/SuperRange';
-import {ShowComponent} from '../../components/ShowComponent/ShowComponent';
+import SuperInputText from '../../c1-common/c1-SuperInputText/SuperInputText';
+import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
+import SuperCheckbox from '../../c1-common/c3-SuperCheckbox/SuperCheckbox';
+import SuperEditableSpan from '../../c1-common/c4-SuperEditableSpan/SuperEditableSpan';
+import SuperSelect from '../../c1-common/c5-SuperSelect/SuperSelect';
+import SuperRadio from '../../c1-common/c6-SuperRadio/SuperRadio';
+import SuperRange from '../../c1-common/c7-SuperRange/SuperRange';
+import {ShowComponent} from '../../ShowComponent/ShowComponent';
+import {SuperNavLink} from '../../c1-common/c91-SuperNavLink/SuperNavLink';
 
 const arr = ['Super', 'Select', 'SuperSelect']
 
@@ -87,6 +88,14 @@ export function Test() {
             }/>
 
             {/*<SuperDoubleRange/>*/}
+
+            <ShowComponent name={'SuperNavLink'} node={
+                <SuperNavLink
+                    goTo={'/test'}
+                    text={'Go to Test page'}
+                />
+            }/>
+
         </div>
     )
 }

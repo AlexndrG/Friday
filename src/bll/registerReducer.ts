@@ -4,7 +4,7 @@ type StateType = typeof initialState
 
 type ActionType = any
 
-export function authReducer(state: StateType = initialState, action: ActionType): StateType {
+export function registerReducer(state: StateType = initialState, action: ActionType): StateType {
     switch (action.type) {
 
 
