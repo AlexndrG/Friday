@@ -1,4 +1,6 @@
 .item {
+    display: inline-block;
+    min-width: 40%;
     border: 1px solid red;
     padding: 10px;
     margin: 10px;
