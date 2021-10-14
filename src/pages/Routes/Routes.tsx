@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Routes.module.css'
-import {NavLink, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {Error404} from '../Error404/Error404';
 import {Profile} from '../Profile/Profile';
 import {PwdRestore} from '../PwdRestore/PwdRestore';
@@ -32,17 +32,8 @@ export const PATH = {
 export function Routes() {
     return (
         <div>
-            <NavLink className={s.item} to={PATH.LOGIN}> Login page </NavLink>
-            <NavLink className={s.item} to={PATH.REGISTER}> Register page </NavLink>
-            <NavLink className={s.item} to={PATH.PROFILE}> Profile page </NavLink>
-            <NavLink className={s.item} to={PATH.PASSWORD_RESTORE}> Restore password page </NavLink>
-            <NavLink className={s.item} to={PATH.PASSWORD_NEW}> New password page </NavLink>
-            <NavLink className={s.item} to={PATH.TEST}> Test page </NavLink>
-            <NavLink className={s.item} to={'Error404'}> Error page </NavLink>
-
-
             <Switch>
-                <Route path={'/'} exact render={() => <Login/>}/>
+                <Route path={'/'} exact render={() => <Test/>}/>
 
                 <Route path={PATH.LOGIN} render={() => <Login/>}/>
                 <Route path={PATH.REGISTER} render={() => <Register/>}/>
