@@ -1,40 +1,66 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './Register.module.css'
 import SuperInputText from '../../c1-common/c1-SuperInputText/SuperInputText';
 import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
 
-export function Register() {
+type PropsType = {
+    email: string
+    password1: string
+    password2: string
+    error: string
+    emailChange: (e: ChangeEvent<HTMLInputElement>) => void
+    password1Change: (e: ChangeEvent<HTMLInputElement>) => void
+    password2Change: (e: ChangeEvent<HTMLInputElement>) => void
+    sendPress: () => void
+}
 
+export function Register(props: PropsType) {
     return (
         <div className={s.main}>
             <h1>Register</h1>
 
             <div className={s.form}>
                 <div className={s.item}>
-                    text1
+                    E-mail
                     <br/>
-                    <SuperInputText/>
+                    <SuperInputText
+                        value={props.email}
+                        onChange={props.emailChange}
+                    />
                 </div>
 
                 <div className={s.item}>
-                    text2
+                    Password
                     <br/>
-                    <SuperInputText/>
+                    <SuperInputText
+                        value={props.password1}
+                        onChange={props.password1Change}
+                    />
                 </div>
 
                 <div className={s.item}>
-                    text3
+                    Password (repeat)
                     <br/>
-                    <SuperInputText/>
+                    <SuperInputText
+                        value={props.password2}
+                        onChange={props.password2Change}
+                    />
                 </div>
 
                 <div className={s.item}>
                     <br/>
-                    <SuperButton>
+                    <SuperButton
+                        onClick={props.sendPress}
+                    >
                         Send
                     </SuperButton>
                 </div>
             </div>
+
+            {props.error &&
+            <div className={s.error}>
+                {props.error}
+            </div>}
 
         </div>
     )

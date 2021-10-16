@@ -11,3 +11,8 @@
 .item {
     margin: 10px 0;
 }
+
+.error {
+    color: red;
+    margin: 0 0 0 40px;
+}
