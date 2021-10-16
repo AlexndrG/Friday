@@ -5,9 +5,9 @@ import {Error404} from '../Error404/Error404';
 import {Profile} from '../Profile/Profile';
 import {PwdRestore} from '../PwdRestore/PwdRestore';
 import {PwdNew} from '../PwdNew/PwdNew';
-import {Register} from '../Register/Register';
 import {Login} from '../Login/Login';
 import { Test } from '../Test/Test';
+import { RegisterContainer } from '../Register/RegisterContainer';
 
 /*
 логинизация
@@ -36,7 +36,7 @@ export function Routes() {
                 <Route path={'/'} exact render={() => <Test/>}/>
 
                 <Route path={PATH.LOGIN} render={() => <Login/>}/>
-                <Route path={PATH.REGISTER} render={() => <Register/>}/>
+                <Route path={PATH.REGISTER} render={() => <RegisterContainer/>}/>
                 <Route path={PATH.PROFILE} render={() => <Profile/>}/>
                 <Route path={PATH.PASSWORD_RESTORE} render={() => <PwdRestore/>}/>
                 <Route path={PATH.PASSWORD_NEW} render={() => <PwdNew/>}/>

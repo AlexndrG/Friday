@@ -1,0 +1,13 @@
+.main {
+}
+
+.form {
+    display: inline-block;
+    border: 1px solid blue;
+    padding: 10px;
+    margin: 30px;
+}
+
+.item {
+    margin: 10px 0;
+}
