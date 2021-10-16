@@ -31,7 +31,7 @@ export const PATH = {
 
 export function Routes() {
     return (
-        <div>
+        <div className={s.routeContainer}>
             <Switch>
                 <Route path={'/'} exact render={() => <Test/>}/>
 
