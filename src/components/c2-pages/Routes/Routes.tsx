@@ -1,13 +1,12 @@
 import React from 'react';
-import s from './Routes.module.css'
 import {Route, Switch} from 'react-router-dom';
 import {Error404} from '../Error404/Error404';
 import {Profile} from '../Profile/Profile';
 import {PwdRestore} from '../PwdRestore/PwdRestore';
 import {PwdNew} from '../PwdNew/PwdNew';
 import {Login} from '../Login/Login';
-import { Test } from '../Test/Test';
-import { RegisterContainer } from '../Register/RegisterContainer';
+import {Test} from '../Test/Test';
+import {RegisterContainer} from '../Register/RegisterContainer';
 
 /*
 логинизация

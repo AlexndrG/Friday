@@ -5,13 +5,13 @@ import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
 
 type PropsType = {
     email: string
-    password1: string
+    password: string
     password2: string
     error: string
     emailChange: (e: ChangeEvent<HTMLInputElement>) => void
-    password1Change: (e: ChangeEvent<HTMLInputElement>) => void
+    passwordChange: (e: ChangeEvent<HTMLInputElement>) => void
     password2Change: (e: ChangeEvent<HTMLInputElement>) => void
-    sendPress: () => void
+    registerPress: () => void
 }
 
 export function Register(props: PropsType) {
@@ -33,8 +33,8 @@ export function Register(props: PropsType) {
                     Password
                     <br/>
                     <SuperInputText
-                        value={props.password1}
-                        onChange={props.password1Change}
+                        value={props.password}
+                        onChange={props.passwordChange}
                     />
                 </div>
 
@@ -50,9 +50,9 @@ export function Register(props: PropsType) {
                 <div className={s.item}>
                     <br/>
                     <SuperButton
-                        onClick={props.sendPress}
+                        onClick={props.registerPress}
                     >
-                        Send
+                        Register
                     </SuperButton>
                 </div>
             </div>
