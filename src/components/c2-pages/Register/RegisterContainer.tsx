@@ -6,6 +6,7 @@ import {AppRootStateType} from '../../../bll/store';
 import {Redirect} from 'react-router-dom';
 
 export function RegisterContainer() {
+    const isBusy = useSelector<AppRootStateType, boolean>(state => state.register.isBusy)
     const isRegistered = useSelector<AppRootStateType, boolean>(state => state.register.isRegistered)
     const error = useSelector<AppRootStateType, string>(state => state.register.error)
     const dispatch = useDispatch()
@@ -59,6 +60,7 @@ export function RegisterContainer() {
 
     return (
         <Register
+            isBusy={isBusy}
             email={email}
             password={password}
             password2={password2}
