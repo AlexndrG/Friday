@@ -40,7 +40,7 @@ export function RegisterContainer() {
     }
 
     const registerPress = () => {
-        if (email === '' && password === '' && password2 === '') {
+        if (email === '' || password === '' || password2 === '') {
             dispatch(setErrorAC('Fill all fields!'))
             return
         }

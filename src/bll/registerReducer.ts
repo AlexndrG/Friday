@@ -50,7 +50,7 @@ export const registerTC = (email: string, password: string) => (dispatch: Dispat
         .catch(err => {
             // console.log('err: ',err.response.data)
             // console.dir(err)
-            dispatch(setErrorAC(err.response.data.error))
+            dispatch(setErrorAC(err.response ? err.response.data.error : err.message))
         })
         .finally(() => {
             dispatch(setIsBusyAC(false))
