@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../bll/store";
 import {getAuthUserTC, updateNameAndImgTC} from "../../../bll/profileReducer";
 import { Redirect } from 'react-router-dom';
+import s from './Profile.module.css'
 
 export function Profile() {
     const imgUrl = useSelector<AppStoreType, string>(state => state.profile.imgUrl)
@@ -22,29 +23,26 @@ export function Profile() {
     }
 
     return (
-        <div>
+        <div className={s.profileContainer}>
+                <div className={s.profileData}>
             <img alt={'Profile image'} src={imgURLUi}/>
-            <div>
-                <span>
+                </div>
+            <div className={s.profileData}>
                 Avatar URL:
                  <SuperEditableSpan
                      value={imgURLUi}
                      onChange={(e:ChangeEvent<HTMLInputElement>)=>{setImgURLUi(e.currentTarget.value)}}
                      onBlur={(e) => dispatch(updateNameAndImgTC(e.currentTarget.value, nameUi))}
                  />
-                </span>
                 {/*<button onClick={()=> dispatch(getAuthUserTC())}>Check request</button>*/}
             </div>
-            <div>
-                <span>
+            <div className={s.profileData}>
                 Name:
                 <SuperEditableSpan
                     value={nameUi}
                     onChange={e => setNameUi(e.currentTarget.value)}
                     onBlur={(e) => dispatch(updateNameAndImgTC(imgURLUi, e.currentTarget.value))}
                 />
-
-                </span>
             </div>
             {/*{error !== '' && <div>{error}</div>}*/}
         </div>
