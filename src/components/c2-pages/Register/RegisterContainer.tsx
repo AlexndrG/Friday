@@ -13,6 +13,7 @@ export function RegisterContainer() {
 
     useEffect(() => {
         return () => {
+            dispatch(setErrorAC(''))
             dispatch(setIsRegisteredAC(false))
         }
     }, [])
