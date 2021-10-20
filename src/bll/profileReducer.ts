@@ -1,37 +1,36 @@
-import {ProfileDataResponseType} from "../components/c2-pages/Login/login-api";
+import {ProfileDataResponseType} from '../components/c2-pages/Login/login-api';
 import {Dispatch} from 'redux'
-import {profileAPI} from "../dal/api-profile";
-
-const initialState:ProfileDataResponseType = {
-    _id: '',
-    email: '',
-    name: '',
-    avatar: '',
-    publicCardPacksCount: 0,// количество колод
-    created: new Date(),
-    updated: new Date(),
-    isAdmin: false,
-    verified: false, // подтвердил ли почту
-    rememberMe: false,
-    error: '',
-
-}
+import {profileAPI} from '../dal/api-profile';
 
 const initialState = {
+    userData: {
+        _id: '',
+        email: '',
+        name: '',
+        avatar: '',
+        publicCardPacksCount: 0,// количество колод
+        created: new Date(),
+        updated: new Date(),
+        isAdmin: false,
+        verified: false, // подтвердил ли почту
+        rememberMe: false,
+        error: '',
+    } as ProfileDataResponseType,
+
     isAuth: false,
     name: '',
     imgUrl: '',
     error: ''
 }
+
 type StateType = typeof initialState
 
 export function profileReducer(state: StateType = initialState, action: ActionType): StateType {
-
-export function profileReducer(state: ProfileDataResponseType = initialState, action: ProfileActionType): ProfileDataResponseType {
     switch (action.type) {
-        case "profile/SET-PROFILE-DATA":{
+        case 'profile/SET-PROFILE-DATA': {
             return {
-                ...action.userProfile
+                ...state,
+                userData: {...action.userProfile}
             }
         }
 
@@ -63,8 +62,9 @@ export function profileReducer(state: ProfileDataResponseType = initialState, ac
             return state
     }
 }
+
 //actions
-export const setProfileData = (userProfile:ProfileDataResponseType) => {
+export const setProfileData = (userProfile: ProfileDataResponseType) => {
     return {
         type: 'profile/SET-PROFILE-DATA',
         userProfile
@@ -95,7 +95,7 @@ export const getAuthUserTC = () => (dispatch: Dispatch) => {
         .then((res) => {
             console.log(res.data.name)
             dispatch(setNameAC(res.data.name))
-            dispatch(setImgUrlAC(res.data.avatar))
+            dispatch(setImgUrlAC(res.data.avatar || ''))
             dispatch(setAuthAC(true))
         })
         .catch((err) => {
@@ -108,3 +108,4 @@ type ActionType =
     | ReturnType<typeof setImgUrlAC>
     | ReturnType<typeof setErrorAC>
     | ReturnType<typeof setAuthAC>
+    | ProfileActionType

@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './Routes.module.css'
 import {Route, Switch} from 'react-router-dom';
 import {Error404} from '../Error404/Error404';
 import {Profile} from '../Profile/Profile';

@@ -1,11 +1,11 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from './Login.module.css'
 import {LoginForm} from "./LoginForm";
-import {LoginStatusType, setLoginData, setLoginRequest} from "../../../bll/loginReducer";
+import {LoginStatusType, setLoginRequest} from "../../../bll/loginReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStoreType} from "../../../bll/store";
 import {Redirect} from "react-router-dom";
 import {PATH} from "../Routes/Routes";
+import {AppRootStateType} from '../../../bll/store';
 
 type FormStateType = {
     email: string
@@ -14,10 +14,9 @@ type FormStateType = {
 }
 
 export function Login() {
-    debugger
-    const isLoggedIn = useSelector<AppStoreType,boolean>(state=>state.login.isLoggedIn)
-    const error = useSelector<AppStoreType,string>(state=>state.login.error)
-    const status = useSelector<AppStoreType,LoginStatusType>(state=>state.login.loginStatus)
+    const isLoggedIn = useSelector<AppRootStateType,boolean>(state=>state.login.isLoggedIn)
+    const error = useSelector<AppRootStateType,string>(state=>state.login.error)
+    const status = useSelector<AppRootStateType,LoginStatusType>(state=>state.login.loginStatus)
     const dispatch = useDispatch()
     let [formData, setFormData] = useState<FormStateType>({
         email: '',

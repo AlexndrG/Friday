@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 // Test mode
-// const baseURL = 'http://localhost:7542/2.0/'
+ const baseURL = 'http://localhost:7542/2.0/'
 
 
 // Normal mode
-const baseURL = 'https://neko-back.herokuapp.com/2.0/'
+// const baseURL = 'https://neko-back.herokuapp.com/2.0/'
 
 const instance = axios.create({
     baseURL,
@@ -20,9 +20,25 @@ export const profileAPI = {
     },
     getAuthInfo() {
         // return instance.post<RegisterResponseType>('auth/me');
-        return instance.post<RegisterParamsType, AxiosResponse>('auth/me', {});
+        // return instance.post<RegisterParamsType, AxiosResponse>('auth/me', {});
+        return instance.post<LoginResponseType>('auth/me', {});
     },
 }
+
+export type LoginResponseType = {
+    _id: string
+    email: string
+    name: string
+    avatar?: string
+    publicCardPacksCount: number // количество колод
+    created: Date
+    updated: Date
+    isAdmin: boolean
+    verified: boolean            // подтвердил ли почту
+    rememberMe: boolean
+    error?: string
+}
+
 
 type RegisterParamsType = {
     avatar?: string
