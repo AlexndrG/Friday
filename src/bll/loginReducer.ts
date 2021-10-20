@@ -1,56 +1,81 @@
-import {LoginResponseType} from "../components/c2-pages/Login/login-api";
+import {loginAPI} from "../components/c2-pages/Login/login-api";
+import {Dispatch} from "react";
+import {ProfileActionType, setProfileData} from "./profileReducer";
+import {AxiosError} from 'axios'
 
-type LoginStateType = LoginResponseType & {
+export type LoginStatusType = 'Loading' | 'Succeeded' | ''
+type LoginStateType = {
     isLoggedIn: boolean
-    password: string
+    error: string,
+    loginStatus: LoginStatusType
 }
 
 const initialState: LoginStateType = {
-    _id: '',
-    email: '',
-    name: '',
-    avatar: '',
-    publicCardPacksCount: 0,// количество колод
-    created: new Date(),
-    updated: new Date(),
-    isAdmin: false,
-    verified: false, // подтвердил ли почту
-    rememberMe: false,
-    error: '',
+    loginStatus: '',
     isLoggedIn: false,
-    password: ''
-
+    error: '',
 }
 
 
-export function loginReducer(state: LoginStateType = initialState, action: ActionType): LoginStateType {
-    debugger
+export function loginReducer(state: LoginStateType = initialState, action: LoginActionTypes): LoginStateType {
     switch (action.type) {
         case "login/SET-LOGIN-DATA": {
             return {
                 ...state,
-                email: action.email,
-                rememberMe: action.rememberMe,
-                password: action.password,
                 isLoggedIn: true
             }
         }
-
+        case 'login/SET-LOGIN-STATUS':{
+            return {
+                ...state,
+                loginStatus:action.status
+            }
+        }
+        case "login/SET-ERROR":{
+            return {
+                ...state,
+                error:action.error
+            }
+        }
         default:
             return state
     }
 }
 
 //actions
-export const setLoginData = (email: string, password: string, rememberMe: boolean) => {
+export const setLoginData = () => {
     return {
         type: 'login/SET-LOGIN-DATA',
-        email,
-        password,
-        rememberMe
-    }
+    } as const
 }
-export const setError = () => {
-
+export const setLoginStatus = (status: LoginStatusType) => {
+    return {
+        type: 'login/SET-LOGIN-STATUS',
+        status
+    } as const
 }
-type ActionType = ReturnType<typeof setLoginData>
+export const setError = (error: string) => {
+    return {
+        type: 'login/SET-ERROR',
+        error
+    } as const
+}
+type LoginActionTypes =
+    ReturnType<typeof setLoginStatus>
+    | ReturnType<typeof setLoginData>
+    | ReturnType<typeof setError>
+    | ProfileActionType
+//thunk
+export const setLoginRequest = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<LoginActionTypes>) => {
+    dispatch(setLoginStatus('Loading'))
+    loginAPI.logIn(email, password, rememberMe)
+        .then(response => {
+            dispatch(setLoginData())
+            dispatch(setProfileData({...response.data}))
+            dispatch(setLoginStatus('Succeeded'))
+        })
+        .catch((e: AxiosError) => {
+            dispatch(setError(e.message))
+            dispatch(setLoginStatus(''))
+        })
+}

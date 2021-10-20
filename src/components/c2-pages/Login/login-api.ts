@@ -3,7 +3,7 @@ import axios from 'axios'
 const instance = axios.create({
     baseURL: 'http://localhost:7542/2.0/'
 })
-export type LoginResponseType = {
+export type ProfileDataResponseType = {
     _id: string
     email: string
     name: string
@@ -19,6 +19,9 @@ export type LoginResponseType = {
 }
 export const loginAPI = {
     logIn(email:string, password:string,rememberMe:boolean) {
-        return instance.post<LoginResponseType>('auth/login',{email,password,rememberMe})
+        return instance.post<ProfileDataResponseType>('auth/login',{email,password,rememberMe})
+    },
+    logOut(){
+        return instance.delete('auth/me')
     }
 }
