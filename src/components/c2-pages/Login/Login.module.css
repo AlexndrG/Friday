@@ -1,0 +1,29 @@
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: rgb(65, 170, 221);
+    background: linear-gradient(0deg, rgba(65, 170, 221, 1) 0%, rgba(133, 176, 213, 0.9920343137254902) 53%, rgba(165, 205, 198, 1) 100%);
+    width: 100%;
+}
+
+.loginCard {
+    display: flex;
+    width: 413px;
+    height: 500px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0px 10px 20px rgba(61, 57, 54, 0.04), 0px 2px 6px rgba(61, 57, 54, 0.04), 0px 0px 1px rgba(61, 57, 54, 0.04);
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+.form button {
+    width: 80px;
+}
