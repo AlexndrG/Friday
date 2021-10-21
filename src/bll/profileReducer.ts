@@ -1,6 +1,8 @@
 import {ProfileDataResponseType} from '../components/c2-pages/Login/login-api';
 import {Dispatch} from 'redux'
 import {profileAPI} from '../dal/api-profile';
+import {setIsBusyAC} from "./registerReducer";
+import {setLoginData} from "./loginReducer";
 
 const initialState = {
     userData: {
@@ -17,10 +19,8 @@ const initialState = {
         error: '',
     } as ProfileDataResponseType,
 
-    isAuth: false,
-    name: '',
-    imgUrl: '',
-    error: ''
+    isBusy: false,
+    error: '',
 }
 
 type StateType = typeof initialState
@@ -37,13 +37,19 @@ export function profileReducer(state: StateType = initialState, action: ActionTy
         case 'PROFILE/SET-USER-NAME':
             return {
                 ...state,
-                name: action.name,
+                userData: {
+                    ...state.userData,
+                    name: action.name
+                }
             }
 
-        case 'PROFILE/SET-USER-IMAGE':
+        case 'PROFILE/SET-USER-AVATAR':
             return {
                 ...state,
-                imgUrl: action.imgUrl,
+                userData: {
+                    ...state.userData,
+                    avatar: action.imgUrl
+                }
             }
 
         case 'PROFILE/SET-ERROR':
@@ -52,10 +58,11 @@ export function profileReducer(state: StateType = initialState, action: ActionTy
                 error: action.errorText,
             }
 
-        case 'PROFILE/SET-AUTH':
+
+        case 'PROFILE/SET-IS-BUSY':
             return {
                 ...state,
-                isAuth: action.isAuth,
+                isBusy: action.isBusy
             }
 
         default:
@@ -72,40 +79,40 @@ export const setProfileData = (userProfile: ProfileDataResponseType) => {
 }
 export type ProfileActionType = ReturnType<typeof setProfileData>
 
-
 export const setNameAC = (name: string) => ({type: 'PROFILE/SET-USER-NAME', name} as const)
-export const setImgUrlAC = (imgUrl: string) => ({type: 'PROFILE/SET-USER-IMAGE', imgUrl} as const)
+export const setAvatarAC = (imgUrl: string | undefined)  => ({type: 'PROFILE/SET-USER-AVATAR', imgUrl} as const)
 export const setErrorAC = (errorText: string) => ({type: 'PROFILE/SET-ERROR', errorText} as const)
-export const setAuthAC = (isAuth: boolean) => ({type: 'PROFILE/SET-AUTH', isAuth} as const)
+export const setBusyAC = (isBusy: boolean) => ({type: 'PROFILE/SET-IS-BUSY', isBusy} as const)
 
 
-export const updateNameAndImgTC = (imgUrl: string, name: string) => (dispatch: Dispatch) => {
+export const updateNameAndImgTC = (imgUrl: string | undefined, name: string) => (dispatch: Dispatch) => {
+    // dispatch(setIsBusyAC(true))
     profileAPI.updateProfileData(imgUrl, name)
         .then((res) => {
             dispatch(setNameAC(name))
-            dispatch(setImgUrlAC(imgUrl))
+            dispatch(setAvatarAC(imgUrl))
         })
         .catch(err => {
             dispatch(setErrorAC(err.response.data.error))
         })
+        .finally(() => {
+        dispatch(setIsBusyAC(false))
+    })
 }
 
 export const getAuthUserTC = () => (dispatch: Dispatch) => {
     profileAPI.getAuthInfo()
-        .then((res) => {
-            console.log(res.data.name)
-            dispatch(setNameAC(res.data.name))
-            dispatch(setImgUrlAC(res.data.avatar || ''))
-            dispatch(setAuthAC(true))
+        .then((response) => {
+            dispatch(setProfileData({...response.data}))
         })
-        .catch((err) => {
-            // dispatch(setAuthAC(false))
+        .catch(() => {
+            // dispatch(setLoginData(false))
         })
 }
 
 type ActionType =
     | ReturnType<typeof setNameAC>
-    | ReturnType<typeof setImgUrlAC>
+    | ReturnType<typeof setAvatarAC>
     | ReturnType<typeof setErrorAC>
-    | ReturnType<typeof setAuthAC>
+    | ReturnType<typeof setBusyAC>
     | ProfileActionType

@@ -1,7 +1,7 @@
 import {instance} from '../components/c2-pages/Login/login-api';
 
 export const profileAPI = {
-    updateProfileData(avatar: string, name: string) {
+    updateProfileData(avatar: string | undefined, name: string) {
         // return instance.put<RegisterResponseType>('auth/me', {avatar: avatar, name: name});
         return instance.put<RegisterParamsType, AxiosResponse>('auth/me', {avatar, name});
     },

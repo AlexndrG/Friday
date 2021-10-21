@@ -2,12 +2,12 @@ import React from 'react';
 import s from './Routes.module.css'
 import {Route, Switch} from 'react-router-dom';
 import {Error404} from '../Error404/Error404';
-import {Profile} from '../Profile/Profile';
 import {PwdRestore} from '../PwdRestore/PwdRestore';
 import {PwdNew} from '../PwdNew/PwdNew';
 import {Login} from '../Login/Login';
 import {Test} from '../Test/Test';
 import {RegisterContainer} from '../Register/RegisterContainer';
+import {ProfileContainer} from "../Profile/ProfileCintainer";
 
 /*
 логинизация
@@ -37,7 +37,7 @@ export function Routes() {
 
                 <Route path={PATH.LOGIN} render={() => <Login/>}/>
                 <Route path={PATH.REGISTER} render={() => <RegisterContainer/>}/>
-                <Route path={PATH.PROFILE} render={() => <Profile/>}/>
+                <Route path={PATH.PROFILE} render={() => <ProfileContainer/>}/>
                 <Route path={PATH.PASSWORD_RESTORE} render={() => <PwdRestore/>}/>
                 <Route path={PATH.PASSWORD_NEW} render={() => <PwdNew/>}/>
                 <Route path={PATH.TEST} render={() => <Test/>}/>

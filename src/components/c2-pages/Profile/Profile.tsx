@@ -1,59 +1,54 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, FocusEvent, KeyboardEvent, useEffect, useState} from 'react';
 import SuperEditableSpan from '../../c1-common/c4-SuperEditableSpan/SuperEditableSpan';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from '../../../bll/store';
-import {getAuthUserTC, updateNameAndImgTC} from '../../../bll/profileReducer';
-import {Redirect} from 'react-router-dom';
 import s from './Profile.module.css'
+import {Loader} from "../../Loader/Loader";
 
-export function Profile() {
-    const imgUrl = useSelector<AppRootStateType, string>(state => state.profile.imgUrl)
-    const name = useSelector<AppRootStateType, string>(state => state.profile.name)
+type ProfilePropsType = {
+    isBusy: boolean
+    imgUrl: string | undefined
+    name: string
+    isLoggedIn: boolean
+    error: string
+    avatarUI: string | undefined
+    nameUi: string
+    changeAvatarHandler: (e: ChangeEvent<HTMLInputElement>) => void
+    onKeyAvatarChangeHandler: (e: KeyboardEvent<HTMLInputElement>) => void
+    onBlurAvatarHandler: (e: FocusEvent<HTMLInputElement>) => void
+    changeNameHandler: (e: ChangeEvent<HTMLInputElement>) => void
+    onKeyNameChangeHandler: (e: KeyboardEvent<HTMLInputElement>) => void
+    onBlurNameHandler: (e: FocusEvent<HTMLInputElement>) => void
+}
 
-    // const isAuth = useSelector<AppRootStateType, boolean>(state => state.profile.isAuth)
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
-
-    // const error = useSelector<AppStoreType, string>(state => state.profile.error)
-    const dispatch = useDispatch()
-
-
-    const [imgURLUi, setImgURLUi] = useState(imgUrl)
-    const [nameUi, setNameUi] = useState(name)
-
-    useEffect(() => {
-        dispatch(getAuthUserTC())
-    }, [])
-
-    // if (!isAuth) {
-    if (!isLoggedIn) {
-        return <Redirect to={'/login'}/>
-    }
-
+export function Profile(props: ProfilePropsType) {
     return (
         <div className={s.profileContainer}>
             <div className={s.profileData}>
-                <img alt={'Profile image'} src={imgURLUi}/>
+                <img alt={'Profile image'} src={props.avatarUI}/>
             </div>
             <div className={s.profileData}>
                 Avatar URL:
                 <SuperEditableSpan
-                    value={imgURLUi}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                        setImgURLUi(e.currentTarget.value)
-                    }}
-                    onBlur={(e) => dispatch(updateNameAndImgTC(e.currentTarget.value, nameUi))}
+                    value={props.avatarUI}
+                    onChange={props.changeAvatarHandler}
+                    onKeyPress={props.onKeyAvatarChangeHandler}
+                    onBlur={props.onBlurAvatarHandler}
                 />
-                {/*<button onClick={()=> dispatch(getAuthUserTC())}>Check request</button>*/}
             </div>
             <div className={s.profileData}>
                 Name:
                 <SuperEditableSpan
-                    value={nameUi}
-                    onChange={e => setNameUi(e.currentTarget.value)}
-                    onBlur={(e) => dispatch(updateNameAndImgTC(imgURLUi, e.currentTarget.value))}
+                    value={props.nameUi}
+                    onChange={props.changeNameHandler}
+                    onKeyPress={props.onKeyNameChangeHandler}
+                    onBlur={props.onBlurNameHandler}
                 />
             </div>
-            {/*{error !== '' && <div>{error}</div>}*/}
+
+            {props.isBusy &&
+            <div>
+                <Loader/>
+            </div>}
+            {props.error !== '' && <div>{props.error}</div>}
         </div>
     )
 }
